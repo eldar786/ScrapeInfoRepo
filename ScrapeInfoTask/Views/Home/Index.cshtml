@@ -1,0 +1,138 @@
+﻿@model IEnumerable<ScrapeInfoTask.Models.ScrapeInfo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Date filter: </h1>
+
+@using (Html.BeginForm())
+{
+    <table class="col-lg-4">
+        <tr>
+            <td><h3>From</h3></td>
+            <td>
+                @Html.TextBox("dtFrom", "", htmlAttributes: new { @class = "form-control" })
+            </td>
+            <td><h3>To</h3></td>
+            <td>
+                @Html.TextBox("dtTo", "", htmlAttributes: new { @class = "form-control" })
+            </td>
+            <td><button class="btn btn-primary" type="submit">Filter</button></td>
+        </tr>
+    </table>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MarketCap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearFounded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfEmp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Headquarters)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreviousClosePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpenPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MarketCap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearFounded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfEmp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Headquarters)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreviousClosePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenPrice)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            $(document).ready(function () {
+                // Date From Part //
+                var fromdate = new Date();
+                var todayfrom = new Date(fromdate.getFullYear(), fromdate.getMonth(), fromdate.getDate());
+
+                todayfrom.setMonth(fromdate.getMonth());
+                var optSimple = {
+                    dateFormat: 'dd.m.yy.',
+                    todayHighlight: true,
+                    orientation: 'bottom center',
+                    autoclose: true
+                };
+                $('#dtFrom').datepicker(optSimple);
+                $('#dtFrom').datepicker('setDate', todayfrom);
+
+                // Date To Part //
+
+                var todate = new Date();
+                var todayto = new Date(todate.getFullYear(), todate.getMonth(), todate.getDate());
+                todayto.setMonth(todate.getMonth());
+
+                var optSimple = {
+                    dateFormat: 'dd.m.yy.',
+                    todayHighlight: true,
+                    orientation: 'bottom center',
+                    autoclose: true
+                };
+                $('#dtTo').datepicker(optSimple);
+                $('#dtTo').datepicker('setDate', todayto);
+
+            });
+        });
+    </script>
+}

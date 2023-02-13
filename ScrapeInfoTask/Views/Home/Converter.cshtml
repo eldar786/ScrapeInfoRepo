@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Converter";
+}
+
+<h1>Converter</h1>
+
+<h3>Excel to word</h3>
+
+<button class="btn btn-primary" type="submit" asp-controller="">Upload word document</button>
+
+@Html.Label("file", "", htmlAttributes: new { @class = "form-control" })
+
+<br />
+
+<button class="btn btn-primary" type="submit" asp-controller="">Convert</button>
+
+
+  using Aspose.Cells;
+  var workbook = new Workbook("input.csv");
+  workbook.Save("Output.docx");
+
+
+
+
